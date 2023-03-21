@@ -1,0 +1,26 @@
+name: Release management from tag
+
+# Trigger when we push a versioned tag.
+
+on:
+  push:
+    tags: "v*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.17"
+      - name: Build
+        run: go build
+      - name: Tarballize
+        run: tar -czf rageshake.tar.gz rageshake
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: rageshake.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
