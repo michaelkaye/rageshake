@@ -1,5 +1,5 @@
 // This is what is baked by GitHub Actions
-group "default" { targets = ["debug", "regular"] }
+group "default" { targets = ["regular", "debug"] }
 
 // Targets filled by GitHub Actions: one for the regular tag, one for the debug tag
 target "docker-metadata-action" {}
